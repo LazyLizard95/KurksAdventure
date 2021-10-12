@@ -15,6 +15,7 @@ var skeleton = {
 
 };
 
+
 const skeleState = {
     states: {},
     generateState: function(name, startIndex, endIndex) {
@@ -33,7 +34,7 @@ const skeleState = {
     }
 };
 
-skeleState.generateState("skeleidle", 0, 6);
+skeleState.generateState("skeleidle", 0, 10);
 
 function skeleAnimate(state){
     context.drawImage(
@@ -49,13 +50,13 @@ function skeleAnimate(state){
 
     );
         skeleCout ++;
-        if (skeleCout > 12){
-            skeleState.skeleFrameIndex ++;
+        if (skeleCout > 8){
+            state.skeleFrameIndex ++;
             skeleCout = 0;
         }
         
-        if (skeleState.skeleFrameIndex > skeleState.endIndex){
-            skeleState.skeleFrameIndex = skeleState.startIndex;
+        if (state.skeleFrameIndex > state.endIndex){
+            state.skeleFrameIndex = state.startIndex;
         }
 
 }
