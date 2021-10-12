@@ -31,15 +31,23 @@ userInput.addEventListener('keyup', (event) =>{
 });  
 
 
+let intervalID; 
 function damage(){
-    
-    player.health = player.health - skeleton.power;
-    i++;
+    if (!intervalID){
+    intervalID = setInterval(startDamage, 5000);
+        
+}
+}
+function startDamage(){
+    if(skeleton.health > 0){
+        player.health = player.health - skeleton.power;
+    }
 
 }
 
-
-
+function stopDamage(){
+    clearInterval(intervalID);
+}
 
 
 function battle(){
@@ -48,14 +56,13 @@ function battle(){
     playerAnimate(playerState.getState("idle"));
     skeleAnimate(skeleState.getState("skeleidle"));
    
+    while (skeleton.health > 0){
     
-    for(i = 0; i < 2; i++){
-    setTimeout(damage, 5000);
+    damage();
     
-    }
       
     console.log(player.health);
-        
+    }    
     
     if(skeleton.health == 0){
         player.experience = player.experience + skeleton.experience;
