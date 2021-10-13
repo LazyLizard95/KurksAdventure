@@ -35,17 +35,17 @@ function battle(){
     playerAnimate(playerState.getState("idle"));
     skeleAnimate(skeleState.getState("skeleidle"));
     if(player.health && skeleton.health > 0){
-    let damageCountdown = setTimeout(startDamage, 7000);
+    let damageCountdown = setTimeout(startDamage, 5500);
         
         function startDamage(){
             counter--;
-            if(counter === 0){
+            if(counter === 0 && skeleton.health > 0){
             for(i = 0; i < 1;){
                 player.health = player.health - skeleton.power;
                 console.log(player.health);
-                counter = 85;
+                counter = 100;
                 i++;
-            }
+            } 
         clearTimeout(damageCountdown);
             
         }
@@ -65,3 +65,9 @@ function battle(){
 
 battle();
 
+//  TODO: Top down overworld / state machine. 
+//  Random amount of damage dealt and taken within a given value.
+//  Animation on attack player & enemy.
+//  Animation on death player & enemy.
+//  Basic sound effects.
+//  Add strong spells, that cannot be used one after the other. 

@@ -14,7 +14,6 @@ var player = {
     gold: 10,
     stamina: 1,
     experience: 0
-
 };
 
 
