@@ -4,7 +4,7 @@ const userInput = document.querySelector(".battle");
 const width = canvas.width = 600;
 const height = canvas.height = 600;
 const scale = 1;
-
+let counter = 5;
 
 
 var possibleEnemies = [skeleton];
@@ -31,23 +31,6 @@ userInput.addEventListener('keyup', (event) =>{
 });  
 
 
-let intervalID; 
-function damage(){
-    if (!intervalID){
-    intervalID = setInterval(startDamage, 5000);
-        
-}
-}
-function startDamage(){
-    if(skeleton.health > 0){
-        player.health = player.health - skeleton.power;
-    }
-
-}
-
-function stopDamage(){
-    clearInterval(intervalID);
-}
 
 
 function battle(){
@@ -56,13 +39,20 @@ function battle(){
     playerAnimate(playerState.getState("idle"));
     skeleAnimate(skeleState.getState("skeleidle"));
    
-    while (skeleton.health > 0){
+    let damageCountdown = setInterval(startDamage, 5000);
+        
+           function startDamage(){
+            counter--;
+            if(counter === 0){
+            player.health = player.health - skeleton.power;
+            console.log(player.health);
+                clearInterval(damageCountdown);
+                return counter = 5;
+            }
+            return damageCountdown;
+        }
     
-    damage();
     
-      
-    console.log(player.health);
-    }    
     
     if(skeleton.health == 0){
         player.experience = player.experience + skeleton.experience;
@@ -73,12 +63,5 @@ function battle(){
 }
 
 
-
-
-
-
-
-
-
-
 battle();
+
